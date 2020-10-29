@@ -27,7 +27,7 @@ public class CustomLoginInfo extends ConstraintLayout {
         et_login_info = findViewById(R.id.et_login_q1);
 
         TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.CustomLoginInfo, 0, 0);
-        if (attributes != null){
+        if (attributes != null) {
             int textColor = attributes.getResourceId(R.styleable.CustomLoginInfo_text_color, Color.rgb(255, 255, 255));
             tv_login_info.setTextColor(getResources().getColor(textColor));
 
