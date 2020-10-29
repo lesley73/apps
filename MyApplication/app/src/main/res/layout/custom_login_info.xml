@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tv_login_q1"
+        android:layout_width="@dimen/px500"
+        android:layout_height="@dimen/px85"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textSize="@dimen/px50"/>
+
+    <EditText
+        android:id="@+id/et_login_q1"
+        android:layout_width="@dimen/px500"
+        android:layout_height="@dimen/px85"
+        android:background="#@drawable/round"
+        android:textSize="@dimen/px40"
+        android:textColor="@color/backgroudpink"
+        android:layout_marginTop="@dimen/px5"
+        android:gravity="center_vertical"/>
+
+
+</merge>

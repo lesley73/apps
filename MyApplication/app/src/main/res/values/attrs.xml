@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomLoginInfo">
+        <attr name="text_color" format="reference|integer" />
+        <attr name="text_size" format="boolean" />
+        <attr name="text" format="string" />
+        <attr name="edittext_color" format="reference|integer" />
+        <attr name="edittext_size" format="boolean" />
+        <attr name="edittext_drawable" format="reference|integer" />
+        <attr name="edittext_hint" format="string" />
+    </declare-styleable>
+</resources>

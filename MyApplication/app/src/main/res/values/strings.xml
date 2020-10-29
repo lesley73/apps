@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="str_init_title">Hi\n胡予柠</string>
+    <string name="skip">SKIP</string>
+    <string name="str_login_q1">请输入女朋友名字：</string>
+    <string name="str_upload_head">上传头像</string>
+    <string name="str_username_hint">输错了就会关机哦~</string>
+    <string name="str_login_q2">请输入女朋友手机号：</string>
+    <string name="str_login_q3">请输入女朋友生日：</string>
+    <string name="str_btn_choose">选择</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="px50">50px</dimen>
+    <dimen name="px150">150px</dimen>
+    <dimen name="px250">250px</dimen>
+    <dimen name="px420">420px</dimen>
+    <dimen name="px85">85px</dimen>
+    <dimen name="px500">500px</dimen>
+    <dimen name="px40">40px</dimen>
+    <dimen name="px5">5px</dimen>
+    <dimen name="px375">375px</dimen>
+    <dimen name="px30">30px</dimen>
+    <dimen name="px60">60px</dimen>
+    <dimen name="px125">125px</dimen>
+</resources>
