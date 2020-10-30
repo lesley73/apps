@@ -11,6 +11,7 @@ import android.os.PersistableBundle;
 import android.text.Editable;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -42,6 +43,8 @@ import java.util.Date;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final String TAG = "LoginActivity";
+    TimePickerView timePickerView = null;
     private Button btn_timeSelector;
     private Button btn_login;
     private TextView tv_timePick;
@@ -51,16 +54,17 @@ public class LoginActivity extends AppCompatActivity {
     private String birthday, input_name, input_phone;
     private ProgressBar progressBar;
     private MyDataBaseHelper dbHelper;
-    TimePickerView timePickerView = null;
 
-    MyHandler handler = new MyHandler(new WeakReference<LoginActivity>(this));
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.activity_login);
-        btn_timeSelector = findViewById(R.id.btn_time_choose);
-        tv_timePick = findViewById(R.id.tv_birthday);
+        View view = LayoutInflater.from(LoginActivity.this).inflate(R.layout.activity_login, null);
+        btn_timeSelector = view.findViewById(R.id.btn_time_choose);
+        if (btn_timeSelector == null) Log.d(TAG, "btn_timeSelector == null");
+        tv_timePick = view.findViewById(R.id.tv_birthday);
         ev_name = findViewById(R.id.et_login_q1);
         ev_phone = findViewById(R.id.et_login_q2);
         login_head = findViewById(R.id.img_upload_head);
@@ -75,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (timePickerView != null) {
                     initTimePicker();
-                    timePickerView.show(v);
+                    timePickerView.show();
                 }
             }
         });
@@ -93,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
         }else {
             login_head.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.login_head));
         }
-
+        final MyHandler handler = new MyHandler(new WeakReference<LoginActivity>(this));
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
