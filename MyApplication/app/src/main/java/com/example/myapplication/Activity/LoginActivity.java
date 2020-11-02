@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.PersistableBundle;
 import android.text.Editable;
@@ -56,37 +57,30 @@ public class LoginActivity extends AppCompatActivity {
     private MyDataBaseHelper dbHelper;
 
 
-
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        View view = LayoutInflater.from(LoginActivity.this).inflate(R.layout.activity_login, null);
-        btn_timeSelector = view.findViewById(R.id.btn_time_choose);
-        if (btn_timeSelector == null) Log.d(TAG, "btn_timeSelector == null");
-        tv_timePick = view.findViewById(R.id.tv_birthday);
+//        View view = LayoutInflater.from(LoginActivity.this).inflate(R.layout.activity_login, null);
+        btn_timeSelector = findViewById(R.id.btn_time_choose);
+        tv_timePick = findViewById(R.id.tv_birthday);
         ev_name = findViewById(R.id.et_login_q1);
         ev_phone = findViewById(R.id.et_login_q2);
+        btn_login = findViewById(R.id.btn_login);
         login_head = findViewById(R.id.img_upload_head);
+        progressBar = findViewById(R.id.process_bar);
         dbHelper = new MyDataBaseHelper(this, "UserDB.db", null, 1);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         btn_timeSelector.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (timePickerView != null) {
-                    initTimePicker();
-                    timePickerView.show();
-                }
+                initTimePicker();
+                timePickerView.show();
             }
         });
         String path = getCacheDir().getPath();
         String fileName = "login_head";
         File file = new File(path, fileName);
-        if (file.exists()){
+        if (file.exists()) {
             Bitmap bitmap = null;
             try {
                 bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
@@ -94,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
+        } else {
             login_head.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.login_head));
         }
         final MyHandler handler = new MyHandler(new WeakReference<LoginActivity>(this));
@@ -104,6 +98,13 @@ public class LoginActivity extends AppCompatActivity {
                 handler.sendEmptyMessage(0);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
     }
 
     private void initTimePicker() {
@@ -150,15 +151,16 @@ public class LoginActivity extends AppCompatActivity {
         return format.format(date);
     }
 
-    class MyHandler extends Handler{
+    class MyHandler extends Handler {
         private WeakReference<LoginActivity> activity;
-        MyHandler(WeakReference<LoginActivity> activity){
+
+        MyHandler(WeakReference<LoginActivity> activity) {
             this.activity = activity;
         }
 
         @Override
         public void handleMessage(@NonNull Message msg) {
-            if (msg.what == 0){
+            if (msg.what == 0) {
                 progressBar.setVisibility(View.VISIBLE);
                 new Thread(new Runnable() {
                     @Override
@@ -168,13 +170,15 @@ public class LoginActivity extends AppCompatActivity {
                             tv_timePick.setText(birthday);
                             input_name = ev_name.getText().toString();
                             input_phone = ev_phone.getText().toString();
-                            if (input_name.equals("李展鸿") && input_phone.equals("15961706056") && birthday.equals("1996年04月26日")){
+                            if (input_name.equals("李展鸿") && input_phone.equals("15961706056") && birthday.equals("1996年04月26日")) {
                                 progressBar.setVisibility(View.GONE);
                                 Intent intent = new Intent(LoginActivity.this, CollectionActivity.class);
                                 startActivity(intent);
-                            }else {
+                            } else {
+                                Looper.prepare();
                                 progressBar.setVisibility(View.INVISIBLE);
                                 Toast.makeText(LoginActivity.this, "不会吧不会吧，其中有一个或多个答案错了啊，不会真的有人记不住吧", Toast.LENGTH_LONG).show();
+                                Looper.loop();
                                 ev_name.setText("");
                                 ev_phone.setText("");
                                 tv_timePick.setText("");
