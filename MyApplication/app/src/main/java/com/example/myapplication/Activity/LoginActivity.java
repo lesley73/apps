@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView login_head;
     private String birthday, input_name, input_phone;
     private ProgressBar progressBar;
-    private MyDataBaseHelper dbHelper;
 
 
     @Override
@@ -69,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         login_head = findViewById(R.id.img_upload_head);
         progressBar = findViewById(R.id.process_bar);
-        dbHelper = new MyDataBaseHelper(this, "UserDB.db", null, 1);
         btn_timeSelector.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,11 +106,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initTimePicker() {
+        final MyHandler handler = new MyHandler(new WeakReference<LoginActivity>(LoginActivity.this));
         timePickerView = new TimePickerBuilder(
                 LoginActivity.this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
                 birthday = getTime(date);
+                handler.sendEmptyMessage(1);
             }
         })
                 .setType(new boolean[]{true, true, true, false, false, false})
@@ -167,26 +167,31 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             Thread.sleep(500);
-                            tv_timePick.setText(birthday);
                             input_name = ev_name.getText().toString();
                             input_phone = ev_phone.getText().toString();
-                            if (input_name.equals("李展鸿") && input_phone.equals("15961706056") && birthday.equals("1996年04月26日")) {
-                                progressBar.setVisibility(View.GONE);
+                            if (input_name.equals("lizhanhong") && input_phone.equals("15961706056") && birthday.equals("1996-04-26")) {
+                                progressBar.setVisibility(View.INVISIBLE);
                                 Intent intent = new Intent(LoginActivity.this, CollectionActivity.class);
                                 startActivity(intent);
                             } else {
                                 Looper.prepare();
                                 progressBar.setVisibility(View.INVISIBLE);
                                 Toast.makeText(LoginActivity.this, "不会吧不会吧，其中有一个或多个答案错了啊，不会真的有人记不住吧", Toast.LENGTH_LONG).show();
-                                Looper.loop();
                                 ev_name.setText("");
                                 ev_phone.setText("");
                                 tv_timePick.setText("");
+                                Looper.loop();
                             }
-
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+                    }
+                }).start();
+            } else if (msg.what == 1) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tv_timePick.setText(birthday);
                     }
                 }).start();
             }
