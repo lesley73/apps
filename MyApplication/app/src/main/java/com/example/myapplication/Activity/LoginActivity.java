@@ -1,5 +1,7 @@
 package com.example.myapplication.Activity;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -42,7 +44,7 @@ import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
 
     private static final String TAG = "LoginActivity";
     TimePickerView timePickerView = null;

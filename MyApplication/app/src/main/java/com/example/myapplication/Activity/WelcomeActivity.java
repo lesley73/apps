@@ -1,5 +1,6 @@
 package com.example.myapplication.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.utils.SharedPreUtil;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends Activity {
 
     private Button btn_jump;
 
@@ -62,16 +63,12 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-
-        //setAnimation();
-
         thread.start();
 
         btn_jump = (Button) findViewById(R.id.btn_jump);
         btn_jump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                flag = true;
                 message.what = 0;
                 handler.sendMessage(message);
 
@@ -85,13 +82,9 @@ public class WelcomeActivity extends AppCompatActivity {
                     Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
-
                 finish();
-
-
             }
         });
 
-//        ApplicationUtil.getInstance().addActivity(this);
     }
 }

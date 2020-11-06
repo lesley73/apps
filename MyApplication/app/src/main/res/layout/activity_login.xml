@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroudpink">
+    android:background="@color/blue">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cstl_upload_head"
@@ -20,6 +20,7 @@
             android:layout_width="@dimen/px250"
             android:layout_height="@dimen/px250"
             android:layout_gravity="center"
+            android:translationZ="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +60,7 @@
         android:background="@drawable/round"
         android:gravity="center_vertical"
         android:hint="@string/str_username_hint"
-        android:textColor="@color/backgroudpink"
+        android:textColor="@color/ricewhite"
         android:textSize="@dimen/px40"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -119,9 +120,9 @@
         android:id="@+id/btn_time_choose"
         android:layout_width="@dimen/px150"
         android:layout_height="@dimen/px85"
-        android:background="#DFF1558B"
+        android:background="@color/ricewhite"
         android:text="@string/str_btn_choose"
-        android:textColor="@color/white"
+        android:textColor="@color/blue"
         android:textSize="@dimen/px40"
         app:layout_constraintLeft_toRightOf="@id/tv_birthday"
         app:layout_constraintTop_toBottomOf="@id/tv_login_q3" />
@@ -131,9 +132,9 @@
         android:layout_width="@dimen/px250"
         android:layout_height="@dimen/px85"
         android:layout_marginTop="@dimen/px50"
-        android:background="#DFF1558B"
+        android:background="@color/ricewhite"
         android:text="@string/str_btn_choose"
-        android:textColor="@color/white"
+        android:textColor="@color/blue"
         android:textSize="@dimen/px40"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
